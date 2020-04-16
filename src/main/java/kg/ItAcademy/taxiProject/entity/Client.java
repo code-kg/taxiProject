@@ -1,6 +1,5 @@
 package kg.ItAcademy.taxiProject.entity;
 
-import com.fasterxml.jackson.databind.ser.std.StdArraySerializers;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,16 +7,19 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table (name = "taxi")
+@Table(name = "customer")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Taxi {
+public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
-    @Column (name = "phone_number", nullable = false)
+    @Column(name = "phone",nullable = false,unique = true)
     private Long phone;
+    @ManyToOne
+    @JoinColumn(name = "taxi",nullable = false)
+    private Taxi taxi;
 }
